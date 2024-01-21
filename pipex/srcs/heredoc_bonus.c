@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:40:59 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/21 19:30:44 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:09:34 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	first_heredoc(t_pipex *px, char **av, char **envp)
 	t_cmd	*cmd;
 	char	**paths;
 
-	dup2(px->pipe_here_doc[0], 0); // crashes
+	dup2(px->pipe_here_doc[0], 0);
 	dup2(px->pipe[0][1], 1);
 	close(px->pipe_here_doc[0]);
 	close(px->pipe[0][0]);
@@ -51,6 +51,8 @@ void	middle_heredoc(t_pipex *px, char **av, char **envp, int curr)
 	}
 	close(px->pipe[curr - 1][1]);
 	close(px->pipe[curr][0]);
+	close(px->pipe_here_doc[0]);
+	close(px->pipe_here_doc[1]);
 	paths = get_paths(envp);
 	cmd = cmd_get(paths, av[3 + curr]);
 	tab_free(paths);
@@ -70,7 +72,7 @@ void	last_heredoc(t_pipex *px, char **av, char **envp)
 	int		fd;
 	int		i;
 
-	fd = open(av[px->cmd_amt + 3], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
+	fd = open(av[px->cmd_amt + 3], O_CREAT | O_WRONLY, 0664);
 	if (fd < 0)
 		ft_initferror("pipex: permission denied: %s", av[px->cmd_amt + 3]);
 	dup2(fd, 1);
@@ -82,6 +84,8 @@ void	last_heredoc(t_pipex *px, char **av, char **envp)
 		close(px->pipe[i][1]);
 	}
 	close(px->pipe[px->cmd_amt - 2][1]);
+	close(px->pipe_here_doc[0]);
+	close(px->pipe_here_doc[1]);
 	paths = get_paths(envp);
 	cmd = cmd_get(paths, av[px->cmd_amt + 2]);
 	tab_free(paths);
@@ -110,7 +114,7 @@ void	read_heredoc(t_pipex *px, char **av)
 	dup2(0, px->pipe_here_doc[1]);
 	close(px->pipe_here_doc[0]);
 	limiter = ft_strjoin(av[2], "\n", 0);
-	write(0, "pipex heredoc> ", 16);
+	write(0, "pipex heredoc> ", 15);
 	line = get_next_line(0);
 	while (ft_strcmp(line, limiter))
 	{

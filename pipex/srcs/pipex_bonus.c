@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:43:45 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/21 18:43:45 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:10:21 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	last(t_pipex *px, char **av, char **envp)
 	int		fd;
 	int		i;
 
-	fd = open(av[px->cmd_amt + 2], O_CREAT | O_TRUNC | O_WRONLY, 0000644);
+	fd = open(av[px->cmd_amt + 2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
 	if (fd < 0)
 		ft_initferror("pipex: permission denied: %s", av[px->cmd_amt + 2]);
 	dup2(fd, 1);
