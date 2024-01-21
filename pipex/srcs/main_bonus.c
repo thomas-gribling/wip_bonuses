@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 09:32:03 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/18 15:04:51 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/21 18:56:44 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int ac, char **av, char **envp)
 		if (ac < 6)
 			ft_initerror("pipex: arguments error");
 		else
-			ft_initerror("pipex: TODO HERE_DOC");
+			do_heredoc(ac, av, envp);
 	}
 	else
 		do_pipex(ac, av, envp);
