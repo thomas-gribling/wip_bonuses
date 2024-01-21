@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:40:59 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/21 20:09:34 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/21 23:30:23 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	first_heredoc(t_pipex *px, char **av, char **envp)
 
 	dup2(px->pipe_here_doc[0], 0);
 	dup2(px->pipe[0][1], 1);
-	close(px->pipe_here_doc[0]);
+	close(px->pipe_here_doc[1]);
 	close(px->pipe[0][0]);
 	paths = get_paths(envp);
 	cmd = cmd_get(paths, av[3]);
@@ -112,7 +112,6 @@ void	read_heredoc(t_pipex *px, char **av)
 	char	*limiter;
 
 	dup2(0, px->pipe_here_doc[1]);
-	close(px->pipe_here_doc[0]);
 	limiter = ft_strjoin(av[2], "\n", 0);
 	write(0, "pipex heredoc> ", 15);
 	line = get_next_line(0);
