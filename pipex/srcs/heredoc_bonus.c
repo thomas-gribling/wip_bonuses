@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 18:40:59 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/21 23:30:23 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/22 08:51:38 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	last_heredoc(t_pipex *px, char **av, char **envp)
 	int		fd;
 	int		i;
 
-	fd = open(av[px->cmd_amt + 3], O_CREAT | O_WRONLY, 0664);
+	fd = open(av[px->cmd_amt + 3], O_CREAT | O_APPEND | O_WRONLY, 0664);
 	if (fd < 0)
 		ft_initferror("pipex: permission denied: %s", av[px->cmd_amt + 3]);
 	dup2(fd, 1);
@@ -110,17 +110,20 @@ void	read_heredoc(t_pipex *px, char **av)
 {
 	char	*line;
 	char	*limiter;
+	char	*buffer;
 
-	dup2(0, px->pipe_here_doc[1]);
 	limiter = ft_strjoin(av[2], "\n", 0);
-	write(0, "pipex heredoc> ", 15);
+	write(1, "pipex heredoc> ", 15);
 	line = get_next_line(0);
+	buffer = ft_strdup("");
 	while (ft_strcmp(line, limiter))
 	{
-		free(line);
-		write(0, "pipex heredoc> ", 15);
+		buffer = ft_strjoin(buffer, line, 3);
+		write(1, "pipex heredoc> ", 15);
 		line = get_next_line(0);
 	}
+	ft_putstr_fd(buffer, px->pipe_here_doc[1]);
+	free(buffer);
 	free(limiter);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:43:45 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/21 20:10:21 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/22 09:01:03 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,6 @@ void	last(t_pipex *px, char **av, char **envp)
 		ft_initferror("pipex: command not found: %s", av[px->cmd_amt + 1]);
 	}
 	execve(cmd->path, cmd->args, envp);
-}
-
-void	call_pipex(t_pipex *px, char **av, char **envp, int curr)
-{
-	if (curr == 0)
-		first(px, av, envp);
-	else
-		middle(px, av, envp, curr);
 }
 
 void	do_pipex(int ac, char **av, char **envp)
