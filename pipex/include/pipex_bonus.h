@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 08:44:49 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/22 09:00:53 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/22 09:17:03 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,10 @@ typedef struct s_pipex
 }				t_pipex;
 
 void	do_pipex(int ac, char **av, char **envp);
-void	call_pipex(t_pipex *px, char **av, char **envp, int curr);
-void	first(t_pipex *px, char **av, char **envp);
-void	middle(t_pipex *px, char **av, char **envp, int curr);
 void	do_heredoc(int ac, char **av, char **envp);
+void	read_heredoc(t_pipex *px, char **av);
 
+void	close_all_pipes(t_pipex *px, int curr);
 char	**get_paths(char **envp);
 
 int		ft_strcmp(char *s1, char *s2);
