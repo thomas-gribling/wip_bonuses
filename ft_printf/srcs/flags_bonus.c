@@ -6,11 +6,43 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:27:25 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/23 11:21:55 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:22:44 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
+int	get_size(char c, va_list args, long *n, unsigned int *u)
+{
+	if (c == 'd' || c == 'i')
+	{
+		*n = va_arg(args, int);
+		return (ll_len(*n, 10));
+	}
+	if (c == 'u')
+	{
+		*u = va_arg(args, unsigned int);
+		return (ll_len(*u, 10));
+	}
+	if (c == 'x' || c == 'X')
+	{
+		*u = va_arg(args, unsigned int);
+		return (ll_len(*u, 16));
+	}
+	return (0);
+}
+
+void	write_val(char c, long n, unsigned int u, int *size)
+{
+	if (c == 'd' || c == 'i')
+		ft_putbase(n, 10, "0123456789", size);
+	if (c == 'u')
+		ft_putbase(u, 10, "0123456789", size);
+	if (c == 'x')
+		ft_putbase(u, 16, "0123456789abcdef", size);
+	if (c == 'X')
+		ft_putbase(u, 16, "0123456789ABCDEF", size);
+}
 
 void	do_flag_minus(const char *s, int *i, va_list args, int *size)
 {
@@ -72,8 +104,11 @@ void	do_flag_hashtag(const char *s, int *i, va_list args, int *size)
 	if (c != 'x' && c != 'X')
 		return ;
 	val = va_arg(args, unsigned int);
-	*size += ft_putchar('0');
-	*size += ft_putchar(c);
+	if (val > 0)
+	{
+		*size += ft_putchar('0');
+		*size += ft_putchar(c);
+	}
 	if (c == 'x')
 		ft_putbase(val, 16, "0123456789abcdef", size);
 	else
@@ -100,32 +135,12 @@ int	get_width(const char *s, int *i, va_list args)
 	return (width);
 }
 
-int	get_size(char c, va_list args, int *n, unsigned int *u)
-{
-	if (c == 'd' || c == 'i')
-	{
-		*n = va_arg(args, int);
-		return (ll_len(*n, 10));
-	}
-	if (c == 'u')
-	{
-		*u = va_arg(args, unsigned int);
-		return (ll_len(*u, 10));
-	}
-	if (c == 'x' || c == 'X')
-	{
-		*u = va_arg(args, unsigned int);
-		return (ll_len(*u, 16));
-	}
-	return (0);
-}
-
 void	do_flag_zero(const char *s, int *i, va_list args, int *size)
 {
 	int				width;
 	int				len;
 	int				j;
-	int				n;
+	long			n;
 	unsigned int	u;
 
 	*i += 1;
@@ -139,16 +154,12 @@ void	do_flag_zero(const char *s, int *i, va_list args, int *size)
 	u = 0;
 	len = get_size(s[*i], args, &n, &u);
 	j = -1;
+	if (n < 0)
+	{
+		*size += ft_putchar('-');
+		n = -n;
+	}
 	while (++j < width - len)
 		*size += ft_putchar('0');
-	if (s[*i] == 'd' || s[*i] == 'i')
-		ft_putbase(n, 10, "0123456789", size);
-	if (s[*i] == 'u')
-		ft_putbase(u, 10, "0123456789", size);
-	if (s[*i] == 'x')
-		ft_putbase(u, 16, "0123456789abcdef", size);
-	if (s[*i] == 'X')
-		ft_putbase(u, 16, "0123456789ABCDEF", size);
+	write_val(s[*i], n, u, size);
 }
-
-// s d i u x X for . flag

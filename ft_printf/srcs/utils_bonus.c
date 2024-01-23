@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:31:25 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/23 10:40:31 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:43:04 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,16 @@ int	ll_len(long long n, int base)
 		size++;
 	}
 	return (size);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

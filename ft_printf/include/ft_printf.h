@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 13:55:25 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/23 10:46:22 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/23 14:43:31 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ void	do_flag_zero(const char *s, int *i, va_list args, int *size);
 int		ft_max(int a, int b);
 int		ft_atoi(const char *nptr);
 int		ll_len(long long n, int base);
+int		ft_strlen(char *str);
 
 #endif
