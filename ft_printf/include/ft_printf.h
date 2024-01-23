@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 13:55:25 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/23 14:43:31 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:56:35 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	do_flag_minus(const char *s, int *i, va_list args, int *size);
 void	do_flag_plus_space(const char *s, int *i, va_list args, int *size);
 void	do_flag_hashtag(const char *s, int *i, va_list args, int *size);
 void	do_flag_zero(const char *s, int *i, va_list args, int *size);
+void	do_flag_point(const char *s, int *i, va_list args, int *size);
 
 int		ft_max(int a, int b);
 int		ft_atoi(const char *nptr);

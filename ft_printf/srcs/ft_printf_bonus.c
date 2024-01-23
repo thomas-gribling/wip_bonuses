@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:25:01 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/23 16:21:38 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:56:19 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,19 @@ void	ft_treat(const char *s, int *i, va_list args, int *size)
 		do_flag_plus_space(s, i, args, size);
 	else if (s[*i] == '#')
 		do_flag_hashtag(s, i, args, size);
-	else if (s[*i] == '0' || s[*i] == '.')
+	else if (s[*i] == '0')
 		do_flag_zero(s, i, args, size);
+	else if (s[*i] == '.')
+		do_flag_point(s, i, args, size);
 	else
+	{
+		if (s[*i] == '1')
+		{
+			*size += ft_putchar(' ');
+			*i += 1;
+		}
 		ft_convert(s[*i], args, size);
+	}
 }
 
 int	ft_printf(const char *s, ...)

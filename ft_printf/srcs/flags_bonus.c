@@ -6,11 +6,31 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:27:25 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/23 16:22:44 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/23 17:00:02 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
+int	get_width(const char *s, int *i, va_list args)
+{
+	char	c;
+	int		width;
+
+	c = s[*i];
+	if (c == '*')
+	{
+		width = va_arg(args, int);
+		*i += 1;
+	}
+	else
+	{
+		width = ft_atoi(s + *i);
+		while (s[*i] >= '0' && s[*i] <= '9')
+			*i += 1;
+	}
+	return (width);
+}
 
 int	get_size(char c, va_list args, long *n, unsigned int *u)
 {
@@ -42,6 +62,11 @@ void	write_val(char c, long n, unsigned int u, int *size)
 		ft_putbase(u, 16, "0123456789abcdef", size);
 	if (c == 'X')
 		ft_putbase(u, 16, "0123456789ABCDEF", size);
+}
+
+void	do_flag_point(const char *s, int *i, va_list args, int *size)
+{
+	do_flag_zero(s, i, args, size);
 }
 
 void	do_flag_minus(const char *s, int *i, va_list args, int *size)
@@ -113,26 +138,6 @@ void	do_flag_hashtag(const char *s, int *i, va_list args, int *size)
 		ft_putbase(val, 16, "0123456789abcdef", size);
 	else
 		ft_putbase(val, 16, "0123456789ABCDEF", size);
-}
-
-int	get_width(const char *s, int *i, va_list args)
-{
-	char	c;
-	int		width;
-
-	c = s[*i];
-	if (c == '*')
-	{
-		width = va_arg(args, int);
-		*i += 1;
-	}
-	else
-	{
-		width = ft_atoi(s + *i);
-		while (s[*i] >= '0' && s[*i] <= '9')
-			*i += 1;
-	}
-	return (width);
 }
 
 void	do_flag_zero(const char *s, int *i, va_list args, int *size)

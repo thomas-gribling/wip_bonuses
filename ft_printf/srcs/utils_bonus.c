@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 09:31:25 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/23 14:43:04 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:51:23 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	ft_atoi(const char *nptr)
 int	ll_len(long long n, int base)
 {
 	int	size;
-	
+
 	size = 1;
 	if (n < 0)
 	{
