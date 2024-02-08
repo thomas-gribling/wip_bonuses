@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:08:26 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/19 22:55:09 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:02:01 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	get_nearest(t_stack *a, int val, int total)
 	if (near[0] < 0)
 		return (near[1]);
 	if (near[1] < 0)
-		return (near[0]);	
+		return (near[0]);
 	if (val - near[0] > near[1] - val)
 		return (near[1]);
 	return (near[0]);

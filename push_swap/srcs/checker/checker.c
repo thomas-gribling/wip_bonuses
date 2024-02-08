@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:23:43 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/02/08 14:56:02 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:02:16 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	read_stdin(t_stack *a, t_stack *b)
 int	main(int ac, char **av)
 {
 	t_stack	*a;
-	t_stack *b;
+	t_stack	*b;
 
 	if (ac < 2)
 		return (1);
