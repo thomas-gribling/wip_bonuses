@@ -6,7 +6,7 @@
 /*   By: tgriblin <tgriblin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:05:59 by tgriblin          #+#    #+#             */
-/*   Updated: 2024/01/19 22:53:45 by tgriblin         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:56:14 by tgriblin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	stack_add(t_stack *stack, int element);
 void	stack_pop(t_stack *stack);
 size_t	stack_get_index(t_stack *stack, int value);
 int		stack_scan(t_stack *stack, int start, int end);
-void	print_stack(t_stack *stack);
 
 void	ps_do(char *move, t_stack *a, t_stack *b);
 
